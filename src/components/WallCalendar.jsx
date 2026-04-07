@@ -4,6 +4,7 @@ import NotesSection from './NotesSection';
 import './WallCalendar.css';
 
 const WallCalendar = () => {
+
   const [currentDate, setCurrentDate] = useState(new Date());
   
   // Date range selection state
@@ -28,8 +29,7 @@ const WallCalendar = () => {
   const activeTask = activeDate ? tasks[activeDate.toDateString()] : "";
 
   // Example placeholder image from Unsplash for the hero section
-  const heroImageUrl = "https://as1.ftcdn.net/v2/jpg/02/02/24/44/1000_F_202244447_tuMwUhnlltRdcetu1oLFxE8uJZysmEhV.jpg";
-
+  const heroImageUrl = "hero_img.jpg";
   return (
     <div className="wall-calendar">
       <div className="calendar-spiral"></div>
