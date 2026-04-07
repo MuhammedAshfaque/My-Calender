@@ -1,0 +1,45 @@
+/* NotesSection.css */
+
+.notes-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.notes-heading {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.notes-textarea {
+  flex: 1;
+  width: 100%;
+  border: none;
+  resize: none;
+  background-color: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #444;
+
+  /* Line Height controls the lines */
+  line-height: 28px; 
+  
+  /* Create lined paper effect */
+  background-image: repeating-linear-gradient(
+    transparent, 
+    transparent 27px, 
+    #ccc 27px, 
+    #ccc 28px
+  );
+  
+  /* Ensure the text aligns perfectly with lines */
+  padding: 0;
+  outline: none;
+}
+
+.notes-textarea::placeholder {
+  color: #bbb;
+  font-style: italic;
+}

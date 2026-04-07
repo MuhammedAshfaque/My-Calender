@@ -1,0 +1,90 @@
+:root {
+  --primary-blue: #1DA1F2; /* Approximated from the reference */
+  --primary-blue-hover: #1681c2;
+  --bg-color: #f0f2f5;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --border-color: #e1e8ed;
+  --calendar-bg: #ffffff;
+  --selection-bg: rgba(29, 161, 242, 0.15);
+  --selection-color: #1DA1F2;
+  --spiral-metal: #a9a9a9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Wall Calendar Base Styles */
+.wall-calendar {
+  background-color: var(--calendar-bg);
+  width: 100%;
+  max-width: 800px;
+  border-radius: 4px; /* Slight rounding at bottom */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.wall-calendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    var(--spiral-metal) 10px,
+    var(--spiral-metal) 14px,
+    transparent 14px,
+    transparent 20px
+  );
+  z-index: 10;
+  opacity: 0.9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2) inset;
+}
+
+/* Add a hanger */
+.wall-calendar::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 20px;
+  border: 4px solid #333;
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  z-index: 5;
+}
+
+/* Responsive constraints */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+}
