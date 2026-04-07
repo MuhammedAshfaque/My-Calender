@@ -1,7 +1,7 @@
 import React from 'react';
 import './CalendarGrid.css';
 
-const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection }) => {
+const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, onDateClick, tasks = {} }) => {
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
 
@@ -34,17 +34,12 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection }) 
   const handleDayClick = (day) => {
     const clickedDate = new Date(currentYear, currentMonth, day);
 
-    if (!selection.start || (selection.start && selection.end)) {
-      // Start new selection
-      setSelection({ start: clickedDate, end: null });
-    } else {
-      // Complete selection sequence
-      if (clickedDate < selection.start) {
-        setSelection({ start: clickedDate, end: selection.start });
-      } else {
-        setSelection({ start: selection.start, end: clickedDate });
-      }
+    if (onDateClick) {
+      onDateClick(clickedDate);
     }
+
+    // Single date selection instead of range selection
+    setSelection({ start: clickedDate, end: clickedDate });
   };
 
   const getDayClass = (day) => {
@@ -129,8 +124,18 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection }) 
       <div className="days-grid">
         {renderDays()}
       </div>
+
+      <div className="saved-tasks-wrapper">
+        {selection.start && tasks[selection.start.toDateString()] && (
+          <div className="saved-task-view">
+             <h4>Task for {selection.start.toDateString()}</h4>
+             <p>{tasks[selection.start.toDateString()]}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default CalendarGrid;
+

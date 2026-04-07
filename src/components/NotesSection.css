@@ -13,6 +13,14 @@
   margin-bottom: 5px;
 }
 
+.notes-date-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
 .notes-textarea {
   flex: 1;
   width: 100%;
@@ -42,4 +50,21 @@
 .notes-textarea::placeholder {
   color: #bbb;
   font-style: italic;
+}
+
+.save-btn {
+  margin-top: 15px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
 }

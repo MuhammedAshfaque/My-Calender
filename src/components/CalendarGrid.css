@@ -167,3 +167,31 @@
 .calendar-day.selected-start.selected-end {
   border-radius: 5px; /* Revert if start and end are same or end is null */
 }
+
+/* Saved Tasks Below Grid */
+.saved-tasks-wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.saved-task-view {
+  background-color: var(--bg-color);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.saved-task-view h4 {
+  margin: 0 0 5px 0;
+  font-size: 0.9rem;
+  color: var(--primary-blue);
+}
+
+.saved-task-view p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  white-space: pre-wrap;
+}
