@@ -5,11 +5,11 @@ import './WallCalendar.css';
 
 const WallCalendar = () => {
 
+  // Stores current month/year
   const [currentDate, setCurrentDate] = useState(new Date());
   
-  // Date range selection state
-  const [selection, setSelection] = useState({ start: null, end: null });
-  const [lastClickedDate, setLastClickedDate] = useState(null);
+  // It uses to track which date is currently selected for adding/viewing notes. It will be null if no date is selected.
+  const [selectedDate, setSelectedDate] = useState(null);
   const [tasks, setTasks] = useState({});
 
   useEffect(() => {
@@ -20,13 +20,13 @@ const WallCalendar = () => {
   }, []);
 
   const handleSaveTask = (dateString, note) => {
+    // Format of update tasks will be { "Mon Sep 25 2023": "Buy groceries" }
     const updatedTasks = { ...tasks, [dateString]: note };
     setTasks(updatedTasks);
     localStorage.setItem('calendar-tasks', JSON.stringify(updatedTasks));
   };
-
-  const activeDate = lastClickedDate || selection.start;
-  const activeTask = activeDate ? tasks[activeDate.toDateString()] : "";
+  
+  const activeTask = selectedDate ? tasks[selectedDate.toDateString()] : "";
 
   // Example placeholder image from Unsplash for the hero section
   const heroImageUrl = "hero_img.jpg";
@@ -43,7 +43,7 @@ const WallCalendar = () => {
       <div className="wall-calendar-bottom">
         <div className="notes-container">
           <NotesSection 
-            activeDate={activeDate}
+            activeDate={selectedDate}
             activeTask={activeTask}
             onSave={handleSaveTask}
           />
@@ -52,9 +52,8 @@ const WallCalendar = () => {
           <CalendarGrid 
             currentDate={currentDate} 
             setCurrentDate={setCurrentDate}
-            selection={selection}
-            setSelection={setSelection}
-            onDateClick={setLastClickedDate}
+            selectedDate={selectedDate}
+            onDateClick={setSelectedDate}
             tasks={tasks}
           />
         </div>

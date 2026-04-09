@@ -1,5 +1,5 @@
 :root {
-  --primary-blue: #1DA1F2; /* Approximated from the reference */
+  --primary-blue: #1DA1F2;
   --primary-blue-hover: #1681c2;
   --bg-color: #f0f2f5;
   --text-dark: #2c3e50;
@@ -82,7 +82,7 @@ body {
   z-index: 5;
 }
 
-/* Responsive constraints */
+
 @media (max-width: 768px) {
   .app-container {
     padding: 1rem;

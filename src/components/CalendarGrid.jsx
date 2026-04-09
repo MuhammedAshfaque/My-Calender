@@ -1,14 +1,16 @@
 import React from 'react';
 import './CalendarGrid.css';
 
-const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, onDateClick, tasks = {} }) => {
+const CalendarGrid = ({ currentDate, setCurrentDate, selectedDate, onDateClick, tasks = {} }) => {
+  // It returns the month (0-11) and year of the current date to display the calendar for that month and year.
   const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
+  const currentYear = currentDate.getFullYear(); 
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  // First day of the month (0: Sunday, 1: Monday, ..., 6: Saturday)
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-  // Adjust so Monday is 0 instead of Sunday (optional, but matching European/standard calendars often).
-  // The reference image starts with MON TUE WED THU FRI SAT SUN
+  
   const startingDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
   const monthNames = [
@@ -34,12 +36,10 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, on
   const handleDayClick = (day) => {
     const clickedDate = new Date(currentYear, currentMonth, day);
 
+    // It updates the selected date.
     if (onDateClick) {
       onDateClick(clickedDate);
     }
-
-    // Single date selection instead of range selection
-    setSelection({ start: clickedDate, end: clickedDate });
   };
 
   const getDayClass = (day) => {
@@ -53,14 +53,8 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, on
     }
 
     // Selection classes
-    if (isSameDate(thisDate, selection.start)) {
-      classes += " selected-start";
-    }
-    if (isSameDate(thisDate, selection.end)) {
-      classes += " selected-end";
-    }
-    if (selection.start && selection.end && thisDate > selection.start && thisDate < selection.end) {
-      classes += " selected-in-between";
+    if (isSameDate(thisDate, selectedDate)) {
+      classes += " selected-start selected-end";
     }
 
     // Check if it's today
@@ -68,18 +62,18 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, on
     if (isSameDate(thisDate, today)) {
       classes += " today";
     }
-
     return classes;
   };
 
   const renderDays = () => {
     const days = [];
     
-    // Previous month empty slots (we could fill with previous month's dates, but keeping empty for minimal look)
-    const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
+    // Previous month empty slots
+    const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate(); 
     for (let i = 0; i < startingDay; i++) {
        days.push(
          <div key={`empty-${i}`} className="calendar-day empty">
+            {/* It shows last few days of previous month like 29, 30, 31 */}
             {prevMonthDays - startingDay + i + 1}
          </div>
        );
@@ -126,10 +120,11 @@ const CalendarGrid = ({ currentDate, setCurrentDate, selection, setSelection, on
       </div>
 
       <div className="saved-tasks-wrapper">
-        {selection.start && tasks[selection.start.toDateString()] && (
+        {/* toDateString() method converts a date to a string representation like "Mon Sep 25 2023" */}
+        {selectedDate && tasks[selectedDate.toDateString()] && (
           <div className="saved-task-view">
-             <h4>Task for {selection.start.toDateString()}</h4>
-             <p>{tasks[selection.start.toDateString()]}</p>
+             <h4>Task for {selectedDate.toDateString()}</h4>
+             <p>{tasks[selectedDate.toDateString()]}</p>
           </div>
         )}
       </div>
