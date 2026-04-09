@@ -36,7 +36,7 @@ const WallCalendar = () => {
       <div className="calendar-hanger"></div>
       
       <div className="wall-calendar-top">
-        <img src={heroImageUrl} alt="Hero scenery" className="hero-image" />
+        <img src='https://as1.ftcdn.net/v2/jpg/02/02/24/44/1000_F_202244447_tuMwUhnlltRdcetu1oLFxE8uJZysmEhV.jpg' alt="Hero scenery" className="hero-image" />
         <div className="hero-overlay-shape"></div>
       </div>
       
